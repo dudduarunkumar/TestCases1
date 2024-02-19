@@ -1,17 +1,43 @@
-/**
- * @format
- */
+import {fireEvent, render, screen} from "@testing-library/react-native"
+import App from "../App"
+import Counter from "../src/screens/counter/Counter"
 
-import 'react-native';
-import React from 'react';
-import App from '../App';
+const counterProp={
+    navigate:jest.fn()
+}
 
-// Note: import explicitly to use the types shipped with jest.
-import {it} from '@jest/globals';
+describe("render App correctly",()=>{
+    
+    it("render App",()=>{
+        render(<App/>)
+    })
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+    it("render Counter",()=>{
+        render(<Counter navigation={counterProp}/>)
 
-it('renders correctly', () => {
-  renderer.create(<App />);
-});
+        const {getByTestId,getByText} = screen
+        const count =getByText("Count:7")
+        let req=count.props.children[1]
+        const inc=getByTestId("increment")
+        const dec=getByTestId("decrement")
+        const reset=getByTestId("reset")
+        const moveToTodo=getByTestId("moveToTodo")
+        
+        // console.log(count.props.children[1]);
+
+        fireEvent.press(inc)
+        req=req+1
+
+        expect(req).toBe(8)
+
+        fireEvent.press(dec)
+        expect(count.props.children[1]).toBe(7)
+
+        fireEvent.press(reset)
+        expect(count.props.children[1]).toBe(0)
+
+        fireEvent.press(moveToTodo)
+        expect(counterProp.navigate).toHaveBeenCalledWith("Todos")
+    })
+
+})
