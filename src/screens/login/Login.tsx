@@ -9,7 +9,7 @@ interface IProps{
 const Login = ({navigation}:IProps) => {
   return (
     <View>
-      <Text>Login</Text>
+      <Text style={{textAlign:"center"}}>Login</Text>
       <TextInput style={{borderWidth:1,borderColor:"grey"}}/>
       <TouchableOpacity onPress={()=>navigation.navigate("BottomNav")}>
         <Text>Login</Text>
