@@ -12,7 +12,7 @@ const Login = ({navigation}:IProps) => {
       <Text style={{textAlign:"center"}}>Login</Text>
       <TextInput style={{borderWidth:1,borderColor:"grey"}}/>
       <TouchableOpacity onPress={()=>navigation.navigate("BottomNav")}>
-        <Text>Login</Text>
+        <Text>LogIn</Text>
       </TouchableOpacity>
     </View>
   )
